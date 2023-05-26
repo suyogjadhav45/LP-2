@@ -1,0 +1,85 @@
+public class currencyConverter1 {
+	public string currency1 {get ; set ;}
+    public string currency2 {get ; set ;}
+    public double value {get ; set ;}
+    public double result {get ; set ;}
+    
+    public void convert()
+    {
+		if(currency1 == currency2)
+        {
+            result = value;
+        }
+        else if(currency1 == 'Rupee' && currency2 == 'Dollar')
+        {
+            result = value / 82.23;
+        }
+        else if(currency1 == 'Dollar' && currency2 == 'Rupee')
+        {
+			result = value * 82.23;
+        }
+        else if(currency1 == 'Rupee' && currency2 == 'Pound')
+        {
+			result = value * 101.68;
+        }
+        else if(currency1 == 'Pound' && currency2 == 'Rupee')
+        {
+            result = value / 101.68;
+        }
+        else if(currency1 == 'Pound' && currency2 == 'Dollar')
+        {
+            result = value / 1.26;
+        }
+        else if(currency1 == 'Dollar' && currency2 == 'Pound')
+        {
+            result = value * 1.26;
+        }
+    } 
+}
+
+
+
+
+<apex:page controller="currencyConverter1">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="currency 1" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:selectRadio value="{!currency1}" layout="pageDirection">
+                        <apex:selectOption itemValue="Rupee" itemLabel="Rupee"/>
+                        <apex:selectOption itemValue="Dollar" itemLabel="Dollar" />
+                        <apex:selectOption itemValue="Pound" itemLabel="Pound" />
+                    </apex:selectRadio>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="value" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!value}" label="Money" html-placeholder="Please enter a value" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="currency 2" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:selectRadio value="{!currency2}" layout="pageDirection">
+                        <apex:selectOption itemValue="Rupee" itemLabel="Rupee"/>
+                        <apex:selectOption itemValue="Dollar" itemLabel="Dollar" />
+                        <apex:selectOption itemValue="Pound" itemLabel="Pound" />
+                    </apex:selectRadio>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Converted Value"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!result}" id="res"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+            	<apex:commandButton action="{!convert}" reRender="res" value="Convert"/>
+       		</apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
